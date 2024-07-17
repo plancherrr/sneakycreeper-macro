@@ -1,0 +1,80 @@
+package plancher.utils;
+
+import java.awt.Color;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.GlStateManager;
+
+public class FontUtils {
+	public static String enforceWidth(String text, int width) {
+		String[] splitText = text.split(" ");
+		int lineWidth = 0;
+		StringBuilder result = new StringBuilder();
+		for (String word : splitText) {
+			int wordWidth = getStringWidth(word);
+			if (wordWidth + lineWidth > width) {
+				result.append(word).append("\n");
+				lineWidth = 0;
+			} else {
+				result.append(word).append(" ");
+				lineWidth += wordWidth + getStringWidth(" ");
+			}
+		}
+		return result.toString();
+	}
+
+	public static void drawCenteredString(String text, int x, int y, boolean shadow) {
+		y -= getStringHeight(text) / 2;
+		String[] lines = text.split("\n");
+		for (String line : lines) {
+			drawString(line, x - getStringWidth(line) / 2, y, shadow);
+			y += getLineHeight() + 1;
+		}
+	}
+
+	public static void drawCenteredString(String text, int x, int y) {
+		drawCenteredString(text, x, y, true);
+	}
+
+	public static void drawString(String text, int x, int y, boolean shadow) {
+		String[] lines = text.split("\n");
+		for (String line : lines) {
+			Minecraft.func_71410_x().field_71466_p.func_175065_a(line, x, y, Color.WHITE.getRGB(), shadow);
+			y += getLineHeight() + 1;
+		}
+	}
+
+	public static int getStringHeight(String text) {
+		int lines = text.split("\n").length;
+		return lines > 1 ? lines * (getLineHeight() + 1) - 1 : getLineHeight();
+	}
+
+	public static int getStringWidth(String text) {
+		String[] lines = text.split("\n");
+		int longestLine = 0;
+		for (String line : lines) {
+			int lineWidth = Minecraft.func_71410_x().field_71466_p.func_78256_a(line);
+			if (lineWidth > longestLine)
+				longestLine = lineWidth;
+		}
+		return longestLine;
+	}
+
+	public static int getLineHeight() {
+		return Minecraft.func_71410_x().field_71466_p.field_78288_b;
+	}
+
+	public static void drawScaledString(String string, float scale, int x, int y, boolean shadow) {
+		GlStateManager.func_179094_E();
+		GlStateManager.func_179152_a(scale, scale, scale);
+		drawString(string, (int) (x / scale), (int) (y / scale), shadow);
+		GlStateManager.func_179121_F();
+	}
+
+	public static void drawScaledCenteredString(String string, float scale, int x, int y, boolean shadow) {
+		GlStateManager.func_179094_E();
+		GlStateManager.func_179152_a(scale, scale, scale);
+		drawCenteredString(string, (int) (x / scale), (int) (y / scale), shadow);
+		GlStateManager.func_179121_F();
+	}
+}

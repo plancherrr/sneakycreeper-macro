@@ -1,0 +1,19 @@
+Symbol range map extraction starting
+Processing 17 files
+processing plancher\Alps.java
+processing plancher\commands\LoginCommand.java
+processing plancher\commands\MenuCommand.java
+processing plancher\features\AntiEscrowRefund.java
+processing plancher\features\Creeper.java
+processing plancher\features\PestEsp.java
+processing plancher\features\RouteWalker.java
+processing plancher\ui\GuiAlps.java
+processing plancher\ui\LoginGui.java
+processing plancher\ui\components\CategoryButton.java
+processing plancher\ui\components\SwitchButton.java
+processing plancher\utils\ChatUtils.java
+processing plancher\utils\DrawUtils.java
+processing plancher\utils\FontUtils.java
+processing plancher\utils\RotationUtils.java
+processing plancher\utils\ScoreboardUtils.java
+processing plancher\utils\UngrabUtils.java
